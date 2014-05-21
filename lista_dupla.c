@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "lista_dupla.h"
 
 /**
@@ -141,7 +142,61 @@ int delEndList (t_lista_dupla *l)
 	return i;
 }
 
+// int delNo(t_lista_dupla *l, t_apont_no_duplo *no) 
+// {
+//     t_apont_no_duplo aux = l->prim, ant, prox;
 
+//     while (aux != no) {
+//         aux = aux->prox;
+//         if (aux == no) {            
+//             ant = aux->ant;
+//             prox = aux->prox;
+//             ant->prox = prox;
+//             prox->ant = ant;
+//             return aux->info;
+//         }
+//     }
+// }
 
+/**
+ * Remove número rand
+ * @param  l lista de onde será removido
+ * @return último valor
+ */
+int delRand(t_lista_dupla *l, int qnt)
+{
+    t_apont_no_duplo aux = l->prim;
 
+    if (isEmptyList(*l))
+    {
+        printf("Lista vázia\n");
+        return 0;
+    }
 
+    srand(time(0));
+
+    int i, n;
+    t_apont_no_duplo ant, prox;
+    
+    while (l->prim != l->prim->prox) {
+        n = 1 + rand() % qnt;
+        i = 0;
+
+        while (i < n) {            
+            if (i == (n - 1)) {
+                ant       = aux->ant;
+                prox      = aux->prox;
+
+                if (l->prim == aux) l->prim = prox;
+
+                prox->ant = ant;
+                ant->prox = prox;
+                aux       = prox;
+            }
+            aux = aux->prox;
+            i++;
+        }
+    }
+
+    return l->prim->info;
+}

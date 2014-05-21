@@ -5,8 +5,9 @@
 
 int main () {
 	t_lista_dupla l;
-    initLista(&l);
+    initList(&l);
     addBeginningList(&l, 1);
-    showList(&l);
+    addEndList(&l, 2);
+    showList(l);
 	return 0;
 }
